@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -26,8 +26,64 @@
 
 .App-link {
   color: #61dafb;
+} */
+body{
+  height : 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.login{
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input{
+  width: 60%;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* button{
+  width: 50%;
+  padding: 10px;
+  background-color: lightgreen;
+  color: white;
+  border: none;
+  border-radius: 5px;
+} */
+button {
+  width: 60%;
+  padding: 10px;
+  background-color: lightgreen;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  /* Smooth transition for background color */
+}
+
+button:active {
+  background-color: darkgreen;
+  /* Darken the background color when button is clicked */
+}
+.username{
+  font-weight: bold;
+  color: lightgreen;
+  position: absolute;
+  top : 15px;
+  right: 15px;
+}
+.container{
+  width: 50vh;
+  border-radius: 5px;
+  border: 0.5px solid lightgreen;
+
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

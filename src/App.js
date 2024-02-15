@@ -1,25 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState,useEffect } from 'react';
 
-function App() {
+import Navbar from "./components/navbar/Navbar";
+import Card from "./components/cards/Card";
+import {posts} from "D:/Project/rtn_app/src/components/data";
+import { io } from "socket.io-client";
+const App = () => {
+  const [username, setUsername] = useState("");
+  const [user, setUser] = useState("");
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    setSocket(io("http://localhost:5000"));
+  }, []);
+
+  useEffect(() => {
+    socket?.emit("newUser", user);
+  }, [socket, user]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      {user ? (
+        <>
+          <Navbar socket={socket} />
+          {posts.map((post) => (
+            <Card key={post.id} post={post} socket={socket} user={user} />
+          ))}
+          <span className="username">{user}</span>
+        </>
+      ) : (
+        <div className="login">
+          <h2>RTN_App</h2>
+          <input
+            type="text"
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <button onClick={() => setUser(username)}>Login</button>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;
